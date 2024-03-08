@@ -114,7 +114,11 @@ public class Player {
                 try {
                     System.out.print("Choose a media to interact with: ");
                     mediaIndex = Integer.parseInt(sc.next().trim()) - 1;
-                    
+                    if (mediaIndex < 0 || mediaIndex > player.length - 1) {
+                        System.err.println("Invalid media index. Try again.");
+                        System.out.println();
+                        mediaIndex = -1;
+                    }
                 } catch (NumberFormatException e) {
                     System.err.println("Invalid media index. Try again.");
                     mediaIndex = -1;
