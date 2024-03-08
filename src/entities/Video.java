@@ -1,14 +1,16 @@
 package entities;
 
 public class Video extends Media implements ChangeVolume, Reproducible, ChangeLuminosity {
-    private final int duration = 0;
+    private int duration = 0;
     private int volume = 5;
     private String volumeString = "";
     private int luminosity = 5;
     private String luminosityString = "";
 
-    public Video(String title) {
+    public Video(String title, int duration) {
         super(title);
+        mediaType = MediaType.VIDEO;
+        this.duration = duration;
     }
 
     @Override

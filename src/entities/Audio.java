@@ -2,12 +2,14 @@ package entities;
 
 public class Audio extends Media implements ChangeVolume, Reproducible {
 
-    private final int duration = 0;
+    private int duration = 0;
     private int volume = 5;
     private String volumeString = "";
 
-    public Audio(String title) {
+    public Audio(String title, int duration) {
         super(title);
+        mediaType = MediaType.AUDIO;
+        this.duration = duration;
     }
 
     public void setVolumeString() {
