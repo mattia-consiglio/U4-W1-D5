@@ -9,4 +9,6 @@ public interface ChangeVolume {
     void decrementVolume();
 
     void setVolumeString();
+
+    void displayVolume();
 }

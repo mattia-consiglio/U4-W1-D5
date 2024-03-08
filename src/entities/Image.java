@@ -7,6 +7,11 @@ public class Image extends Media implements ChangeLuminosity {
     public Image(String title) {
         super(title);
         mediaType = MediaType.IMAGE;
+        setLuminosityString();
+    }
+
+    public void show() {
+        System.out.println("Image " + this.title + " with luminosity " + this.luminosityString);
     }
 
     @Override
@@ -39,6 +44,12 @@ public class Image extends Media implements ChangeLuminosity {
         for (int i = 0; i < maxLuminosity - this.luminosity; i++) {
             luminosityString.append("・");
         }
-        this.luminosityString = luminosityString.toString();
+        this.luminosityString = luminosityString.toString() + " (" + this.luminosity + ")";
     }
+
+    @Override
+    public void displayLuminosity() {
+        System.out.println("Luminosity: " + this.luminosityString);
+    }
+
 }

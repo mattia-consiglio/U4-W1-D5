@@ -9,4 +9,6 @@ public interface ChangeLuminosity {
     void decrementLuminosity();
 
     void setLuminosityString();
+
+    void displayLuminosity();
 }

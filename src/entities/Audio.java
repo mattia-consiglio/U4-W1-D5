@@ -10,6 +10,7 @@ public class Audio extends Media implements ChangeVolume, Reproducible {
         super(title);
         mediaType = MediaType.AUDIO;
         this.duration = duration;
+        setVolumeString();
     }
 
     public void setVolumeString() {
@@ -20,7 +21,12 @@ public class Audio extends Media implements ChangeVolume, Reproducible {
         for (int i = 0; i < maxVolume - this.volume; i++) {
             volumeString.append(".");
         }
-        this.volumeString = volumeString.toString();
+        this.volumeString = volumeString.toString() + " (" + this.volume + ")";
+    }
+
+    @Override
+    public void displayVolume() {
+        System.out.println("Volume: " + this.volumeString);
     }
 
     @Override
@@ -46,7 +52,7 @@ public class Audio extends Media implements ChangeVolume, Reproducible {
     @Override
     public void play() {
         for (int i = 0; i < this.duration; i++) {
-            System.out.println("Playing " + this.title + " with volume " + this.volumeString);
+            System.out.println("[" + (i + 1) + "] Playing " + this.title + " with volume " + this.volumeString);
         }
     }
 }

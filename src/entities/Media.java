@@ -15,4 +15,12 @@ public abstract class Media {
                 ", mediaType=" + mediaType +
                 '}';
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public MediaType getMediaType() {
+        return mediaType;
+    }
 }

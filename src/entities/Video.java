@@ -11,6 +11,8 @@ public class Video extends Media implements ChangeVolume, Reproducible, ChangeLu
         super(title);
         mediaType = MediaType.VIDEO;
         this.duration = duration;
+        setVolumeString();
+        setLuminosityString();
     }
 
     @Override
@@ -22,7 +24,7 @@ public class Video extends Media implements ChangeVolume, Reproducible, ChangeLu
         for (int i = 0; i < maxVolume - this.volume; i++) {
             volumeString.append(".");
         }
-        this.volumeString = volumeString.toString();
+        this.volumeString = volumeString.toString() + " (" + this.volume + ")";
     }
 
 
@@ -49,7 +51,7 @@ public class Video extends Media implements ChangeVolume, Reproducible, ChangeLu
     @Override
     public void play() {
         for (int i = 0; i < this.duration; i++) {
-            System.out.println("Playing " + this.title + " with volume " + this.volumeString + " and luminosity " + this.luminosityString);
+            System.out.println("[" + (i + 1) + "] Playing " + this.title + " with volume " + this.volumeString + " and luminosity " + this.luminosityString);
         }
     }
 
@@ -83,6 +85,16 @@ public class Video extends Media implements ChangeVolume, Reproducible, ChangeLu
         for (int i = 0; i < maxLuminosity - this.luminosity; i++) {
             luminosityString.append("・");
         }
-        this.luminosityString = luminosityString.toString();
+        this.luminosityString = luminosityString.toString() + " (" + this.luminosity + ")";
+    }
+
+    @Override
+    public void displayVolume() {
+        System.out.println("Volume: " + this.volumeString);
+    }
+
+    @Override
+    public void displayLuminosity() {
+        System.out.println("Luminosity: " + this.luminosityString);
     }
 }
