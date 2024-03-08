@@ -1,4 +1,9 @@
 package entities;
 
-public class Image {
+public class Image extends Media {
+    public Image(String title) {
+        super(title);
+    }
+
+
 }
