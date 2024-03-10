@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.Scanner;
+
 public class Video extends Media implements ChangeVolume, Reproducible, ChangeLuminosity {
     private int duration = 0;
     private int volume = 5;
@@ -96,5 +98,60 @@ public class Video extends Media implements ChangeVolume, Reproducible, ChangeLu
     @Override
     public void displayLuminosity() {
         System.out.println("Luminosity: " + this.luminosityString);
+    }
+
+    @Override
+    public PlayerActions managePlayer(Media media, Scanner sc) {
+        int option;
+
+        Video video = (Video) media;
+        do {
+            System.out.println();
+            System.out.println("What do you want to do?");
+            System.out.println("1. Play");
+            System.out.println("2. Increment volume");
+            System.out.println("3. Decrement volume");
+            System.out.println("4. Increment luminosity");
+            System.out.println("5. Decrement luminosity");
+            System.out.println("6. Select another media");
+            System.out.println("7. Exit application");
+
+
+            //prevent the user from entering a non-integer value
+            try {
+                option = Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                option = 0;
+            }
+
+            switch (option) {
+                case 1:
+                    video.play();
+                    break;
+                case 2:
+                    video.incrementVolume();
+                    video.displayVolume();
+                    break;
+                case 3:
+                    video.decrementVolume();
+                    video.displayVolume();
+                    break;
+                case 4:
+                    video.incrementLuminosity();
+                    video.displayLuminosity();
+                    break;
+                case 5:
+                    video.decrementLuminosity();
+                    video.displayLuminosity();
+                    break;
+                case 6:
+                    return PlayerActions.CONTINUE;
+                case 7:
+                    return PlayerActions.EXIT;
+                default:
+                    System.err.println("Invalid option. Try again.");
+                    break;
+            }
+        } while (true);  //while true because can be exited by returning PlayerActions.EXIT or PlayerActions.CONTINUE
     }
 }

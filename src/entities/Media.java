@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.Scanner;
+
 public abstract class Media {
     protected String title;
     protected MediaType mediaType;
@@ -23,4 +25,6 @@ public abstract class Media {
     public MediaType getMediaType() {
         return mediaType;
     }
+
+    abstract public PlayerActions managePlayer(Media media, Scanner sc);
 }

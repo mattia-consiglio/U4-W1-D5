@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.Scanner;
+
 public class Audio extends Media implements ChangeVolume, Reproducible {
 
     private int duration = 0;
@@ -54,5 +56,41 @@ public class Audio extends Media implements ChangeVolume, Reproducible {
         for (int i = 0; i < this.duration; i++) {
             System.out.println("[" + (i + 1) + "] Playing " + this.title + " with volume " + this.volumeString);
         }
+    }
+
+    @Override
+    public PlayerActions managePlayer(Media media, Scanner sc) {
+        Audio audio = (Audio) media;
+        int option;
+        do {
+            System.out.println();
+            System.out.println("What do you want to do?");
+            System.out.println("1. Play");
+            System.out.println("2. Increment volume");
+            System.out.println("3. Decrement volume");
+            System.out.println("4. Select another media");
+            System.out.println("5. Exit application");
+            option = Integer.parseInt(sc.nextLine().trim());
+            switch (option) {
+                case 1:
+                    audio.play();
+                    break;
+                case 2:
+                    audio.incrementVolume();
+                    audio.displayVolume();
+                    break;
+                case 3:
+                    audio.decrementVolume();
+                    audio.displayVolume();
+                    break;
+                case 4:
+                    return PlayerActions.CONTINUE;
+                case 5:
+                    return PlayerActions.EXIT;
+                default:
+                    System.err.println("Invalid option. Try again.");
+                    break;
+            }
+        } while (true); //while true because can be exited by returning PlayerActions.EXIT or PlayerActions.CONTINUE
     }
 }

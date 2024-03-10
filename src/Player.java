@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Player {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        final int mediaNumber = 5;//REMEMBER to change back to 5
+        final int mediaNumber = 3;//REMEMBER to change back to 5
         Media[] player = new Media[mediaNumber];
         if (mediaNumber > 1) {
             System.out.println("Add " + mediaNumber + " medias to the player");
@@ -129,15 +129,7 @@ public class Player {
             System.out.println("You chose " + player[mediaIndex].getMediaType() + " " + player[mediaIndex].getTitle());
 
 
-            if (player[mediaIndex] instanceof Audio) {
-                action = manageAudio((Audio) player[mediaIndex], sc);
-            }
-            if (player[mediaIndex] instanceof Video) {
-                action = manageVideo((Video) player[mediaIndex], sc);
-            }
-            if (player[mediaIndex] instanceof Image) {
-                action = manageImage((Image) player[mediaIndex], sc);
-            }
+            action = player[mediaIndex].managePlayer(player[mediaIndex], sc);
             System.out.println();
 
         }
@@ -145,133 +137,5 @@ public class Player {
         sc.close();
     }
 
-    public static PlayerActions manageAudio(Audio audio, Scanner sc) {
-        int option;
-        do {
-            System.out.println();
-            System.out.println("What do you want to do?");
-            System.out.println("1. Play");
-            System.out.println("2. Increment volume");
-            System.out.println("3. Decrement volume");
-            System.out.println("4. Select another media");
-            System.out.println("5. Exit application");
-            option = Integer.parseInt(sc.nextLine().trim());
-            switch (option) {
-                case 1:
-                    audio.play();
-                    break;
-                case 2:
-                    audio.incrementVolume();
-                    audio.displayVolume();
-                    break;
-                case 3:
-                    audio.decrementVolume();
-                    audio.displayVolume();
-                    break;
-                case 4:
-                    return PlayerActions.CONTINUE;
-                case 5:
-                    return PlayerActions.EXIT;
-                default:
-                    System.err.println("Invalid option. Try again.");
-                    break;
-            }
-        } while (true); //while true because can be exited by returning PlayerActions.EXIT or PlayerActions.CONTINUE
-
-    }
-
-    public static PlayerActions manageVideo(Video video, Scanner sc) {
-        int option;
-
-        do {
-            System.out.println();
-            System.out.println("What do you want to do?");
-            System.out.println("1. Play");
-            System.out.println("2. Increment volume");
-            System.out.println("3. Decrement volume");
-            System.out.println("4. Increment luminosity");
-            System.out.println("5. Decrement luminosity");
-            System.out.println("6. Select another media");
-            System.out.println("7. Exit application");
-
-
-            //prevent the user from entering a non-integer value
-            try {
-                option = Integer.parseInt(sc.nextLine().trim());
-            } catch (NumberFormatException e) {
-                option = 0;
-            }
-
-            switch (option) {
-                case 1:
-                    video.play();
-                    break;
-                case 2:
-                    video.incrementVolume();
-                    video.displayVolume();
-                    break;
-                case 3:
-                    video.decrementVolume();
-                    video.displayVolume();
-                    break;
-                case 4:
-                    video.incrementLuminosity();
-                    video.displayLuminosity();
-                    break;
-                case 5:
-                    video.decrementLuminosity();
-                    video.displayLuminosity();
-                    break;
-                case 6:
-                    return PlayerActions.CONTINUE;
-                case 7:
-                    return PlayerActions.EXIT;
-                default:
-                    System.err.println("Invalid option. Try again.");
-                    break;
-            }
-        } while (true);  //while true because can be exited by returning PlayerActions.EXIT or PlayerActions.CONTINUE
-
-
-    }
-
-    public static PlayerActions manageImage(Image image, Scanner sc) {
-        int option;
-        do {
-            System.out.println();
-            System.out.println("What do you want to do?");
-            System.out.println("1. Display image");
-            System.out.println("2. Increment luminosity");
-            System.out.println("3. Decrement luminosity");
-            System.out.println("4. Select another media");
-            System.out.println("5. Exit application");
-            try {
-                option = Integer.parseInt(sc.nextLine().trim());
-            } catch (NumberFormatException e) {
-                option = 0;
-            }
-
-            switch (option) {
-                case 1:
-                    image.show();
-                    break;
-                case 2:
-                    image.incrementLuminosity();
-                    image.displayLuminosity();
-                    break;
-                case 3:
-                    image.decrementLuminosity();
-                    image.displayLuminosity();
-                    break;
-                case 4:
-                    return PlayerActions.CONTINUE;
-                case 5:
-                    return PlayerActions.EXIT;
-                default:
-                    System.err.println("Invalid option. Try again.");
-                    break;
-            }
-        } while (true);
-    }
 
 }
